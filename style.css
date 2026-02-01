@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    background-color: coral;
+}
+
+#loginBtn {
+    position: left;
+}
+
+nav {
+    background-color: black;
+}
+
+nav a {
+    background-color: darkgray;
+    display: flex;
+    /* justify-content: space-evenly; */
+    float: left;
+    margin: 10px;
+    padding: 5px;
+}
+
+#navRight {
+    float: right;
+}
+
+nav>div {
+    border: 2px;
+    border-style: solid;
+}
