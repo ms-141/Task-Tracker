@@ -6,39 +6,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // listener for when the button entity gets pressed (clicked)
     button.addEventListener('click', async function () {
-        // create a url object for the endpoint URL
-        const url = 'https://api.quotable.io/quotes/random?limit=3'
+        // Using CORS proxy to bypass certificate issues
+        const url = 'https://corsproxy.io/?https://api.quotable.io/quotes/random?limit=3'
 
-        //save the response to a response object
-        const response = await fetch(url);
+        try {
+            //save the response to a response object
+            const response = await fetch(url);
 
-        // make a try block in the future
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
 
-        // make object to receive the response from the api call
-        const quotes = await response.json();
+            // make object to receive the response from the api call
+            const quotes = await response.json();
 
-        // clearing previous quotes (can get new quotes without refreshing page)
-        container.innerHTML = '';
+            // clearing previous quotes (can get new quotes without refreshing page)
+            container.innerHTML = '';
 
-        // loop over array of quotes
-        //iterating and creating markup
-        quotes.forEach((quoteObj) => {
-            //creating HTML elements to add to the page
-            const quoteDiv = document.createElement('div');
-            const quote = document.createElement('p');
+            // loop over array of quotes
+            //iterating and creating markup
+            quotes.forEach((quoteObj) => {
+                //creating HTML elements to add to the page
+                const quoteDiv = document.createElement('div');
+                const quote = document.createElement('p');
 
-            //quoteObj.content and author use JSON formatting
-            quote.textContent = '"' + quoteObj.content + '" - ' + quoteObj.author;
+                //quoteObj.content and author use JSON formatting
+                quote.textContent = '"' + quoteObj.content + '" - ' + quoteObj.author;
 
-            //adding quote into the quoteDiv
-            quoteDiv.appendChild(quote);
+                //adding quote into the quoteDiv
+                quoteDiv.appendChild(quote);
 
-            //adding the new quoteDiv to the quotes 
-            container.appendChild(quoteDiv);
-        })
+                //adding the new quoteDiv to the quotes container
+                container.appendChild(quoteDiv);
+            });
 
-
+        } catch (error) {
+            console.error('Error:', error);
+            container.innerHTML = '<p style="color:red;">Error loading quotes: ' + error.message + '</p>';
+        }
     })
+
+
+})
 
 
 })
