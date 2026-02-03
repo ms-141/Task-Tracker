@@ -6,19 +6,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // listener for when the button entity gets pressed (clicked)
     button.addEventListener('click', async function () {
-        // Using CORS proxy to bypass certificate issues
-        const url = 'https://corsproxy.io/?https://api.quotable.io/quotes/random?limit=3'
+        // Using ZenQuotes API - works without CORS issues
+        const url = 'https://zenquotes.io/api/quotes'
 
         try {
             //save the response to a response object
             const response = await fetch(url);
 
+            console.log('Response status:', response.status);
+
             if (!response.ok) {
-                throw new Error('API request failed');
+                throw new Error(`API request failed: ${response.status} ${response.statusText}`);
             }
 
             // make object to receive the response from the api call
-            const quotes = await response.json();
+            const allQuotes = await response.json();
+
+            // Get only first 3 quotes
+            const quotes = allQuotes.slice(0, 3);
 
             // clearing previous quotes (can get new quotes without refreshing page)
             container.innerHTML = '';
@@ -31,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 const quote = document.createElement('p');
 
                 //quoteObj.content and author use JSON formatting
-                quote.textContent = '"' + quoteObj.content + '" - ' + quoteObj.author;
+                // DummyJSON uses 'quote' for text and 'author' for author
+                quote.textContent = '"' + quoteObj.quote + '" - ' + quoteObj.author;
 
                 //adding quote into the quoteDiv
                 quoteDiv.appendChild(quote);
