@@ -382,8 +382,9 @@ def apply_plan_progress(user_id, allocations, minutes_multiplier=1.0):
                     (task_id, user_id)
                     )
 
-
+#Lust testing
 if __name__ == "__main__":
+    
     # 1) Create/get a test user
     login = "test_user"
     user_id = get_or_create_user(login, "hashed_password", "test@example.com")
