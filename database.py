@@ -45,14 +45,6 @@ CREATE TABLE IF NOT EXISTS daily_context (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 """)
-# x = datetime.datetime.now()
-# test = [
-#     ('test_user'+ str(x.second), 'hashed_password', x)
-# ]
-# cursor.execute("INSERT INTO users (login_name, password_hash, created_at) VALUES (?, ?, ?);", test[0])
-
-# for row in cursor.execute("SELECT * FROM users"):
-#     print(row)
 
 connection.commit()
 connection.close()
