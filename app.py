@@ -25,7 +25,7 @@ bcrypt = Bcrypt(app)
 
 
 # #############################################
-# SEE DATABASE CONTENTS AT "http://127.0.0.1:5000/debug/all"
+
 from core import query_all
 
 @app.route("/debug/all")
@@ -178,7 +178,7 @@ def tasks():
     if request.method == "POST":
         title = request.form.get("title", "").strip()
         course = request.form.get("course", "").strip() or None
-        due_date = request.form.get("due_date", "").strip()
+        due_date = request.form.get("due_date", "").strip()          # YYYY-MM-DD
         difficulty = int(request.form.get("difficulty", 2))
         importance = int(request.form.get("importance", 2))
         remaining_minutes = int(request.form.get("remaining_minutes", 0))
@@ -186,7 +186,7 @@ def tasks():
         if not title or not due_date:
             return "Missing title or due date", 400
 
-    
+        # optional: clamp to expected 1-3
         difficulty = max(1, min(3, difficulty))
         importance = max(1, min(3, importance))
         remaining_minutes = max(0, remaining_minutes)
@@ -205,6 +205,7 @@ def tasks():
 
     tasks = list_active_tasks(user_id)
     return render_template("tasks.html", tasks=tasks)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
