@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div id="title">
+    <h1>Daily Task Tracker</h1>
+  </div>
+
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('plan') }}">Dashboard</a>
+    <a href="{{ url_for('daily') }}">Daily</a>
+
+    <div id="navRight">
+      <a href="{{ url_for('register') }}">Register</a>
+    </div>
+  </nav>
+
+  <h1>Login</h1>
+
+  <form method="post" action="{{ url_for('login') }}">
+    <label>Username</label><br>
+    <input name="login_name" required><br><br>
+
+    <label>Password</label><br>
+    <input name="password" type="password" required><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p>
+    Don’t have an account?
+    <a href="{{ url_for('register') }}">Register here</a>
+  </p>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
