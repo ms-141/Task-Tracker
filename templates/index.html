@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div id="title">
+        <h1>Daily Task Tracker</h1>
+
+    </div>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('plan') }}">Dashboard</a>
+        <a href="{{ url_for('daily') }}">Daily</a>
+        <a href="{{ url_for('tasks') }}">Task Management</a>
+
+
+        <div id="navRight">
+            {% if session.get("user_id") %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div id="main">
+        <div id="intro">
+            <h2>Overwhelmed with all the tasks you have?</h2>
+            <h3>
+                Task Tracker helps make invisible workload constraints visible and creates a realistic daily plan.</h3>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

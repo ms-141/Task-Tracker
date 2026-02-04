@@ -11,7 +11,7 @@ cursor.execute("PRAGMA foreign_keys = ON;")
 cursor.executescript("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_email TEXT NOT NULL UNIQUE,
+    user_email TEXT UNIQUE,
     login_name TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'active',

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+     <div id="title">
+        <h1>Daily Task Tracker</h1>
+        
+    </div>
+    <nav>
+        <!-- <a href="{{ url_for('index') }}">Home</a> -->
+        <a href="{{ url_for('plan') }}">Dashboard</a>
+        <a href="{{ url_for('daily') }}">Daily</a>
+        <a href="{{ url_for('tasks') }}">Task Management</a>
+
+
+        <div id="navRight">
+            {% if session.get("user_id") %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div>
+        <h1>DASHBOARD PAGE</h1>
+    </div>
+    {% if plan and plan.messages %}
+        <h2>Notes</h2>
+        <ul>
+            {% for m in plan.messages %}
+                <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if plan and plan.allocations and plan.allocations|length > 0 %}
+        <h2>Today's Plan</h2>
+        <ul>
+            {% for a in plan.allocations %}
+                <li>
+                    <b>{{ a.title }}</b> (due {{ a.due_date }}) —
+                    {{ a.minutes }} min <i>({{ a.minutes_range }})</i>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Apply Progress</h2>
+        <form method="post" action="{{ url_for('plan') }}">
+            <label>Minutes multiplier (1.0 = all, 0.5 = half)</label>
+            <input name="minutes_multiplier" value="1.0">
+            <button type="submit">Apply</button>
+        </form>
+    {% endif %}
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
