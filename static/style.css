@@ -1,6 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
+    font-size: 1.5rem;
 }
 
 #title {
@@ -33,4 +34,13 @@ nav a {
 nav>div {
     border: 2px;
     border-style: solid;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+}
+
+#taskSectionSection {
+    border-style: dashed;
 }
