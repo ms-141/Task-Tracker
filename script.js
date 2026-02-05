@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let outputNumber;
     const answerContainer = document.getElementById('timePerDayContainer');
     questionTasks.addEventListener('input', function () {
-        outputNumber = (freeHours * 60) / numOfTasks;
+        outputNumber = Math.round((freeHours * 60) / numOfTasks);
         const answerText = document.createElement('p')
         answerText.textContent = 'You should spend ' + outputNumber + ' minutes on each task.'
         answerContainer.appendChild(answerText);

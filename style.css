@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    text-size-adjust: ;
+    font-size: 1.5grem;
 }
 
 #title {
